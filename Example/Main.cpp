@@ -16,9 +16,5 @@ int main()
 
 	assert(*myInteger == 123);
 
-	std::cout << "I'm going to crash now!" << std::endl;
-
-	*myInteger = 456;
-
 	return 0;
 }
