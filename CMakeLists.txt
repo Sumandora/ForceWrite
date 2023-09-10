@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-if(TARGET ForceWrite)
-	return()
-endif()
+include_guard()
 
 project(ForceWrite)
 add_library(ForceWrite STATIC "${PROJECT_SOURCE_DIR}/Source/ForceWrite.cpp")
