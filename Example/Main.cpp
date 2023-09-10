@@ -10,6 +10,8 @@ int main()
 
 	std::cout << "Allocated memory at " << std::hex << myInteger << std::dec << std::endl;
 
+	std::cout << "Before writing: " << *myInteger << std::endl;
+
 	ForceWrite::write(myInteger, 123);
 
 	std::cout << "After writing: " << *myInteger << std::endl;
