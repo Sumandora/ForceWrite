@@ -6,13 +6,16 @@
 
 int main()
 {
+	using namespace ForceWrite;
+	Writer writer{};
+
 	int* myInteger = (int*)mmap(nullptr, sizeof(int), PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
 
 	std::cout << "Allocated memory at " << std::hex << myInteger << std::dec << std::endl;
 
 	std::cout << "Before writing: " << *myInteger << std::endl;
 
-	ForceWrite::write(myInteger, 123);
+	writer.write(myInteger, 123);
 
 	std::cout << "After writing: " << *myInteger << std::endl;
 

@@ -1,9 +1,21 @@
 #include "ForceWrite.hpp"
 
-void ForceWrite::write(void* ptr, const char* bytes, std::size_t length)
-{
-	if (procMem == nullptr)
-		procMem = std::make_unique<ProcMem>();
+#include <fcntl.h>
+#include <unistd.h>
 
-	pwrite(procMem->fd, bytes, length, reinterpret_cast<off_t>(ptr));
+using namespace ForceWrite;
+
+Writer::Writer()
+	: fd(open("/proc/self/mem", O_WRONLY))
+{
+}
+
+Writer::~Writer()
+{
+	close(fd);
+}
+
+void Writer::write(void* ptr, const void* bytes, std::size_t length) const
+{
+	pwrite(fd, bytes, length, reinterpret_cast<off_t>(ptr));
 }

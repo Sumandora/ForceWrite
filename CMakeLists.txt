@@ -9,10 +9,7 @@ target_compile_features(ForceWrite PRIVATE cxx_std_14)
 target_compile_options(ForceWrite PRIVATE "-Ofast" "-Wno-unused-result")
 
 if(PROJECT_IS_TOP_LEVEL)
-	add_executable(ForceWriteExample "${PROJECT_SOURCE_DIR}/Example/Main.cpp")
-	target_link_libraries(ForceWriteExample PRIVATE ForceWrite)
-
 	enable_testing()
-	add_test(NAME ForceWriteExample COMMAND $<TARGET_FILE:ForceWriteExample>)
+	add_subdirectory("Example")
 endif()
 

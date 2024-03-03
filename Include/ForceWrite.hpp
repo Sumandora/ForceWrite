@@ -2,34 +2,23 @@
 #define FORCEWRITE_HPP
 
 #include <cstdint>
-#include <fcntl.h>
-#include <memory>
-#include <unistd.h>
 
 namespace ForceWrite {
-	struct ProcMem {
-		int fd{};
+	class Writer {
+		int fd;
 
-		ProcMem()
-			: fd{ open("/proc/self/mem", O_WRONLY) }
-		{
-		}
+	public:
+		Writer();
+		~Writer();
 
-		~ProcMem()
+		void write(void* ptr, const void* bytes, std::size_t length) const;
+
+		template <typename T>
+		void write(T* ptr, const T& value) const
 		{
-			close(fd);
+			write(ptr, reinterpret_cast<const void*>(&value), sizeof(T));
 		}
 	};
-
-	static thread_local std::unique_ptr<ProcMem> procMem{ nullptr };
-
-	void write(void* ptr, const char* bytes, std::size_t length);
-
-	template <typename T>
-	void write(T* ptr, const T& value)
-	{
-		write(ptr, reinterpret_cast<const char*>(&value), sizeof(T));
-	}
 
 }
 
