@@ -17,11 +17,14 @@ int main()
 	printf("Before writing: %d\n", *myInteger);
 
 	int newInteger = 123;
-	forcewrite_write(writer, myInteger, &newInteger, sizeof(int));
+	forcewrite_writer_write(writer, myInteger, &newInteger, sizeof(int));
 
 	printf("After writing: %d\n", *myInteger);
 
 	assert(*myInteger == 123);
+
+	forcewrite_writer_cleanup(writer);
+	free(writer);
 
 	return 0;
 }
