@@ -10,6 +10,7 @@ namespace ForceWrite {
 	public:
 		Writer();
 		Writer(const Writer&) = delete;
+		void operator=(const Writer&) = delete;
 		~Writer();
 
 		void write(void* ptr, const void* bytes, std::size_t length) const;
